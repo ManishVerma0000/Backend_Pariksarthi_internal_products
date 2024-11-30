@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ResponseCode, SuccessKey, SuccessMessage } from "../enum/constant";
-import { CreateLine, LineList } from "../services/lineServices";
+import { CreateLine, LineList, ListOfLine } from "../services/lineServices";
 import { ILineCreate } from "../dto/lineCreate";
 export const districtList = async (req: Request, res: Response) => {
   try {
@@ -9,11 +9,7 @@ export const districtList = async (req: Request, res: Response) => {
       success: SuccessKey.SUCCESS,
       statusCode: ResponseCode.SUCCESS_CODE,
       message: SuccessMessage.USER_LOGIN_SUCCESSFULLY,
-      data: [
-        {
-          details: response,
-        },
-      ],
+      data: response
     });
   } catch (error: any) {
     await res.status(400).send({
@@ -42,6 +38,29 @@ export const createLine = async (req: Request, res: Response) => {
           details: response,
         },
       ],
+    });
+  } catch (error: any) {
+    await res.status(400).send({
+      success: SuccessKey.FAIL,
+      statusCode: ResponseCode.VALIDATION_FAILED,
+      message: error.message,
+      errorDetails: [
+        {
+          message: error.message,
+        },
+      ],
+    });
+  }
+};
+
+export const listOfLine = async (req: Request, res: Response) => {
+  try {
+    const response = await ListOfLine();
+    await res.status(200).send({
+      success: SuccessKey.SUCCESS,
+      statusCode: ResponseCode.SUCCESS_CODE,
+      message: SuccessMessage.LINE_CREATED_SUCCESSFULLY,
+      data: response,
     });
   } catch (error: any) {
     await res.status(400).send({

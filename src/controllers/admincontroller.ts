@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import { LoginSuperAdminService } from "../services/adminServices";
 import { ILoginDetails } from "../dto/login";
-import {
-  ResponseCode,
-  SuccessKey,
-  SuccessMessage,
-} from "../enum/constant";
+import { ResponseCode, SuccessKey, SuccessMessage } from "../enum/constant";
 
 export const loginSuperAdmin = async (req: Request, res: Response) => {
   try {
@@ -15,11 +11,7 @@ export const loginSuperAdmin = async (req: Request, res: Response) => {
       success: SuccessKey.SUCCESS,
       statusCode: ResponseCode.SUCCESS_CODE,
       message: SuccessMessage.USER_LOGIN_SUCCESSFULLY,
-      data: [
-        {
-          details: loginResponse,
-        },
-      ],
+      data: loginResponse,
     });
   } catch (error: any) {
     await res.status(400).send({

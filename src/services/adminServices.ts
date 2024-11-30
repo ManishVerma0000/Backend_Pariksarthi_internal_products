@@ -1,14 +1,21 @@
 import { ILoginDetails } from "../dto/login";
-
-export function LoginSuperAdminService(loginDetails: ILoginDetails) {
-  console.log(loginDetails);
+import subStation from "../db/schema/subStationSchema";
+export async function LoginSuperAdminService(loginDetails: ILoginDetails) {
   if (loginDetails.userName == "Admin" && loginDetails.password == "Admin") {
-    const data={
-        userName:"Admin",
-        Type:'Admin'
-    }
+    const data = {
+      userName: "Admin",
+      Type: "Admin",
+    };
     return data;
   } else {
-    throw Error("Login Failed");
+    const checkSubAdmin = await subStation.aggregate([
+      {
+        $match: {
+          houseName: loginDetails.userName,
+          inChargeName: loginDetails.password,
+        },
+      },
+    ]);
+    return checkSubAdmin.length === 0 ? "Invalid user" : checkSubAdmin[0];
   }
 }

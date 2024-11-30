@@ -16,6 +16,10 @@ const lineMenSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  district:{
+    type: String,
+    default: "",
+  }
 });
 const linemen = mongoose.model("linemen", lineMenSchema);
 export default linemen;

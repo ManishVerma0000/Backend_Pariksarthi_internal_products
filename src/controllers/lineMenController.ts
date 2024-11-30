@@ -4,6 +4,7 @@ import {
   CreateTimeTable,
   LineMenCreate,
   LineMenLogin,
+  registerLineMen,
 } from "../services/lineMenServices";
 import { ILineMen } from "../dto/lineMen";
 import { ITimeTable } from "../dto/timeTable";
@@ -44,11 +45,7 @@ export const LoginLineMen = async (req: Request, res: Response) => {
       success: SuccessKey.SUCCESS,
       statusCode: ResponseCode.SUCCESS_CODE,
       message: SuccessMessage.LINEMEN_CREATED_SUCCESSFULLY,
-      data: [
-        {
-          details: response,
-        },
-      ],
+      data: response,
     });
   } catch (error: any) {
     await res.status(400).send({
@@ -77,6 +74,32 @@ export const createTimeTable = async (req: Request, res: Response) => {
           details: response,
         },
       ],
+    });
+  } catch (error: any) {
+    await res.status(400).send({
+      success: SuccessKey.FAIL,
+      statusCode: ResponseCode.VALIDATION_FAILED,
+      message: error.message,
+      errorDetails: [
+        {
+          message: error.message,
+        },
+      ],
+    });
+  }
+};
+
+export const updateDetailsOfLineMenInRegister = async (
+  req: Request,
+  res: Response
+) => {
+  const response = await registerLineMen(req.body);
+  try {
+    await res.status(200).send({
+      success: SuccessKey.SUCCESS,
+      statusCode: ResponseCode.SUCCESS_CODE,
+      message: SuccessMessage.LINEMEN_CREATED_SUCCESSFULLY,
+      data: response
     });
   } catch (error: any) {
     await res.status(400).send({

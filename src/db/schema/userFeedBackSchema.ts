@@ -17,6 +17,10 @@ const userFeedBackSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    userId: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

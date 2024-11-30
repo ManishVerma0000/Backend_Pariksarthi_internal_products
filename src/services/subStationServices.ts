@@ -10,3 +10,7 @@ export const subStationRegister = async (requestBody: ISubStationCreate) => {
   });
   return SuccessMessage.SUBSTATION_CREATED_SUCCESSFULLY;
 };
+export const listOfAllSubstation = async () => {
+  const listOfSubstation = await subStation.find().select("houseName   -_id");
+  return listOfSubstation;
+};

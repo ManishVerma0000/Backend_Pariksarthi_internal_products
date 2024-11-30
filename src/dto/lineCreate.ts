@@ -1,4 +1,5 @@
 export interface ILineCreate{
     lineName:String,
-    district:string
+    district:String,
+    subStation:String
 }
