@@ -5,9 +5,9 @@ const lineMenTimeTableSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    Line: {
-      type: String,
-      default: "",
+    lines: {
+      type: [String],
+      default: [],
     },
     District: {
       type: String,

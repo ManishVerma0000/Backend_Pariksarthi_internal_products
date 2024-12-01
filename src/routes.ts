@@ -12,6 +12,7 @@ import {
   LoginLineMen,
   createTimeTable,
   updateDetailsOfLineMenInRegister,
+  lineTimeTableList,
 } from "./controllers/lineMenController";
 import {
   RegisterSubStation,
@@ -23,8 +24,8 @@ import {
   CreateUserFeedBack,
 } from "./controllers/userController";
 
-
-router.post('/update-line-men',updateDetailsOfLineMenInRegister)
+router.get("/time-table-list", lineTimeTableList);
+router.post("/update-line-men", updateDetailsOfLineMenInRegister);
 router.get("/list-sub-station", listOfSubstation);
 router.post("/create-time-table", createTimeTable);
 router.get("/list-feedback", listUserFeedBacks);

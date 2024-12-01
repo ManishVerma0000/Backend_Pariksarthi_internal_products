@@ -9,7 +9,7 @@ createConnection();
 app.use(express.json());
 app.use("/api", router);
 
-const IPAddress = "192.168.0.104";
+const IPAddress = "192.168.1.101";
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://${IPAddress}:${PORT}`);

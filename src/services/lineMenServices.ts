@@ -14,11 +14,9 @@ export const LineMenCreate = async (requestBody: ILineMen) => {
 };
 
 export const LineMenLogin = async (requestBody: ILineMen) => {
-  console.log(requestBody);
   const lineMenDetails = await linemen.findOne({
     lineMen: requestBody.lineMen,
   });
-  console.log(lineMenDetails);
   if (lineMenDetails?.password == requestBody.password) {
     return lineMenDetails;
   } else {
@@ -27,12 +25,13 @@ export const LineMenLogin = async (requestBody: ILineMen) => {
 };
 
 export const CreateTimeTable = async (requestBody: ITimeTable) => {
-  await timeTable.create({
+  const response = await timeTable.create({
     lineMenName: requestBody.lineMenName,
-    Line: requestBody.Line,
+    lines: requestBody.line,
     message: requestBody.message,
     timeIn: requestBody.timeIn,
     timeOut: requestBody.timeOut,
+    District: requestBody.district,
   });
   return "Message is created Successfully";
 };
@@ -57,4 +56,17 @@ export const registerLineMen = async (requestBody: ILineMenData) => {
     throw new Error("Invalid username or password.");
   }
   return updateLineMen;
+};
+
+export const timeTableList = async () => {
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+  const endOfDay = new Date();
+  endOfDay.setHours(23, 59, 59, 999);
+  return await timeTable.find({
+    createdAt: {
+      $gte: startOfDay,
+      $lt: endOfDay,
+    },
+  });
 };

@@ -9,7 +9,7 @@ export const districtList = async (req: Request, res: Response) => {
       success: SuccessKey.SUCCESS,
       statusCode: ResponseCode.SUCCESS_CODE,
       message: SuccessMessage.USER_LOGIN_SUCCESSFULLY,
-      data: response
+      data: response,
     });
   } catch (error: any) {
     await res.status(400).send({
