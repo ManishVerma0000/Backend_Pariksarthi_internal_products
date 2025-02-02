@@ -10,7 +10,8 @@ createConnection();
 app.use(express.json());
 app.use("/api", router);
 
+const ipaddress='192.168.0.114'
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log('Server is running on port 4001');
 });
